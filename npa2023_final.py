@@ -68,12 +68,7 @@ while True:
 
     # check if the text of the message starts with the magic character "/" followed by your studentID and a space and followed by a command name
     #  e.g.  "/66070123 create"
-    if message.find("/64070156 create") == 0:
-
-        # extract the command
-        command = message.split(" ")[1]
-        print(command)
-    elif message.find("/64070156 delete") == 0:
+    if message.find("/64070156 create") == 0 or message.find("/64070156 delete") == 0:
 
         # extract the command
         command = message.split(" ")[1]
