@@ -9,7 +9,7 @@
 import requests
 import json
 import time
-from restconf_final import create, delete
+from restconf_final import create, delete, enable, disable
 
 #######################################################################################
 # 2. Assign the Webex hard-coded access token to the variable accessToken.
@@ -68,7 +68,7 @@ while True:
 
     # check if the text of the message starts with the magic character "/" followed by your studentID and a space and followed by a command name
     #  e.g.  "/66070123 create"
-    if message.find("/64070156 create") == 0 or message.find("/64070156 delete") == 0:
+    if message.find("/64070156 create") == 0 or message.find("/64070156 delete") == 0 or message.find("/64070156 enable") == 0 or message.find("/64070156 disable") == 0:
 
         # extract the command
         command = message.split(" ")[1]
@@ -80,10 +80,10 @@ while True:
             responseMessage = create()
         elif command == "delete":
             responseMessage = delete()
-        # elif command == "enable":
-        #     <!!!REPLACEME with code for enable command!!!>
-        # elif command == "disable":
-        #     <!!!REPLACEME with code for disable command!!!>
+        elif command == "enable":
+            responseMessage = enable()
+        elif command == "disable":
+            responseMessage = disable()
         # elif command == "status":
         #     <!!!REPLACEME with code for status command!!!>
         else:

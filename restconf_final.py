@@ -20,6 +20,7 @@ def create():
         "name": "Loopback64070156",
         "description": "My RESTCONF loopback",
         "type": "iana-if-type:softwareLoopback",
+        "enabled": False,
         "ietf-ip:ipv4": {
             "address": [
                 {
@@ -64,40 +65,56 @@ def delete():
         return "Cannot delete: Interface loopback {}".format(student_id)
 
 
-# def enable():
-#     yangConfig = <!!!REPLACEME with YANG data!!!>
+def enable():
+    yangConfig = {
+    "ietf-interfaces:interface":{
+        "name":"Loopback64070156",
+        "description":"My RESTCONF loopback",
+        "type":"iana-if-type:softwareLoopback",
+        "enabled":True
+    }
+}
 
-#     resp = requests.<!!!REPLACEME with the proper HTTP Method!!!>(
-#         <!!!REPLACEME with URL!!!>, 
-#         data=json.dumps(<!!!REPLACEME with yangConfig!!!>), 
-#         auth=basicauth, 
-#         headers=<!!!REPLACEME with HTTP Header!!!>, 
-#         verify=False
-#         )
+    resp = requests.put(
+        api_url, 
+        data=json.dumps(yangConfig), 
+        auth=basicauth, 
+        headers=headers, 
+        verify=False
+        )
 
-#     if(resp.status_code >= 200 and resp.status_code <= 299):
-#         print("STATUS OK: {}".format(resp.status_code))
-#         return "<!!!REPLACEME with proper message!!!>"
-#     else:
-#         print('Error. Status Code: {}'.format(resp.status_code))
+    if(resp.status_code >= 200 and resp.status_code <= 299):
+        print("STATUS OK: {}".format(resp.status_code))
+        return"Interface loopback {} is enabled successfully".format(student_id)
+    else:
+        print('Error. Status Code: {}'.format(resp.status_code))
+        return"Cannot enable: Interface loopback {}".format(student_id)
 
 
-# def disable():
-#     yangConfig = <!!!REPLACEME with YANG data!!!>
+def disable():
+    yangConfig = {
+    "ietf-interfaces:interface":{
+        "name":"Loopback64070156",
+        "description":"My RESTCONF loopback",
+        "type":"iana-if-type:softwareLoopback",
+        "enabled":False
+    }
+}
 
-#     resp = requests.<!!!REPLACEME with the proper HTTP Method!!!>(
-#         <!!!REPLACEME with URL!!!>, 
-#         data=json.dumps(<!!!REPLACEME with yangConfig!!!>), 
-#         auth=basicauth, 
-#         headers=<!!!REPLACEME with HTTP Header!!!>, 
-#         verify=False
-#         )
+    resp = requests.put(
+        api_url, 
+        data=json.dumps(yangConfig), 
+        auth=basicauth, 
+        headers=headers, 
+        verify=False
+        )
 
-#     if(resp.status_code >= 200 and resp.status_code <= 299):
-#         print("STATUS OK: {}".format(resp.status_code))
-#         return "<!!!REPLACEME with proper message!!!>"
-#     else:
-#         print('Error. Status Code: {}'.format(resp.status_code))
+    if(resp.status_code >= 200 and resp.status_code <= 299):
+        print("STATUS OK: {}".format(resp.status_code))
+        return "Interface loopback {} is shutdowned successfully".format(student_id)
+    else:
+        print('Error. Status Code: {}'.format(resp.status_code))
+        return "Cannot shutdown: Interface loopback {}".format(student_id)
 
 
 # def status():
