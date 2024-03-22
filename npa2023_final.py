@@ -9,7 +9,7 @@
 import requests
 import json
 import time
-from restconf_final import create
+from restconf_final import create, delete
 
 #######################################################################################
 # 2. Assign the Webex hard-coded access token to the variable accessToken.
@@ -73,13 +73,18 @@ while True:
         # extract the command
         command = message.split(" ")[1]
         print(command)
+    elif message.find("/64070156 delete") == 0:
+
+        # extract the command
+        command = message.split(" ")[1]
+        print(command)
 
 # 5. Complete the logic for each command
 
         if command == "create":
-            responseMessage = create()     
-        # elif command == "delete":
-        #     <!!!REPLACEME with code for delete command!!!>
+            responseMessage = create()
+        elif command == "delete":
+            responseMessage = delete()
         # elif command == "enable":
         #     <!!!REPLACEME with code for enable command!!!>
         # elif command == "disable":

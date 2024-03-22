@@ -4,7 +4,7 @@ requests.packages.urllib3.disable_warnings()
 
 student_id = "64070156"
 # Router IP Address is 10.0.15.189
-api_url = "https://10.0.15.189/restconf/data/ietf-interfaces:interfaces/interface=Loopback {}".format(student_id)
+api_url = "https://10.0.15.189/restconf/data/ietf-interfaces:interfaces/interface=Loopback{}".format(student_id)
 
 # the RESTCONF HTTP headers, including the Accept and Content-Type
 # Two YANG data formats (JSON and XML) work with RESTCONF 
@@ -17,7 +17,7 @@ basicauth = ("admin", "cisco")
 def create():
     yangConfig = {
     "ietf-interfaces:interface": {
-        "name": "Loopback 64070156",
+        "name": "Loopback64070156",
         "description": "My RESTCONF loopback",
         "type": "iana-if-type:softwareLoopback",
         "ietf-ip:ipv4": {
@@ -48,19 +48,20 @@ def create():
         return "Cannot create: interface loopback {}".format(student_id)
 
 
-# def delete():
-#     resp = requests.<!!!REPLACEME with the proper HTTP Method!!!>(
-#         <!!!REPLACEME with URL!!!>, 
-#         auth=basicauth, 
-#         headers=<!!!REPLACEME with HTTP Header!!!>, 
-#         verify=False
-#         )
+def delete():
+    resp = requests.delete(
+        api_url, 
+        auth=basicauth, 
+        headers=headers, 
+        verify=False
+        )
 
-#     if(resp.status_code >= 200 and resp.status_code <= 299):
-#         print("STATUS OK: {}".format(resp.status_code))
-#         return "<!!!REPLACEME with proper message!!!>"
-#     else:
-#         print('Error. Status Code: {}'.format(resp.status_code))
+    if(resp.status_code >= 200 and resp.status_code <= 299):
+        print("STATUS OK: {}".format(resp.status_code))
+        return "Interface loopback {} is deleted successfully".format(student_id)
+    else:
+        print('Error. Status Code: {}'.format(resp.status_code))
+        return "Cannot delete: Interface loopback {}".format(student_id)
 
 
 # def enable():
